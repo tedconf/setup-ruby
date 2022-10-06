@@ -1,39 +1,40 @@
 name: Set up Ruby
 description: Common actions for Rails and Ruby workflows
+
+inputs:
+  ssh-private-key:
+    description: "SSH key for checking out repos"
+    required: true
+  rubygems-key:
+    description: "Key for rubygems"
+    required: true
+
 runs:
   using: 'composite'
   steps:
     - uses: actions/checkout@v3
-#      - name: setup and start elasticsearch
-#        if: inputs.coyote-integration-tests
-#        uses: tedconf/elasticsearch-github-actions@v2.0.0
-#        with:
-#          stack-version: 6.8.23
-#          plugins: 'analysis-icu analysis-phonetic'
-#      - name: Elasticsearch is reachable
-#        if: inputs.coyote-integration-tests
-#        run: |
-#          curl --verbose --show-error http://localhost:9200
     # Setup SSH agent first to allow for checking out repos using SSH, as needed
     - name: Set up SSH agent
       uses: webfactory/ssh-agent@v0.5.3
       with:
-        ssh-private-key: ${{ secrets.TEDCONF_GH_ACTIONS_JENKINS_PRIV_SSH_KEY }}
+        ssh-private-key: ${{ inputs.ssh-private-key }}
     - name: Check for SASL dependencies
-      id: sasl
-      run: |
-        echo ::set-output name=dependency::$(grep memcached Gemfile.lock | wc -l)
-    - name: Install SASL
-      if: steps.sasl.outputs.dependency > 0
-      run: |
-        sudo apt-get -y install libsasl2-dev
+      uses: tedconf/install-ruby-dependency-action@0.0.1
+      with:
+        gem-name: memcached
+        required-library: libsasl2-dev
+    - name: Check for cURL dependencies
+      uses: tedconf/install-ruby-dependency-action@0.0.1
+      with:
+        gem-name: curb
+        required-library: "libcurl4 libcurl3-gnutls libcurl4-openssl-dev"
     - name: Set up Ruby
       # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
       # change this to ruby/setup-ruby@v1 (see
       # https://github.com/ruby/setup-ruby#versioning)
       uses: ruby/setup-ruby@v1.111.0
       env:
-        BUNDLE_RUBYGEMS__TED__COM: ${{ secrets.BUNDLE_RUBYGEMS__TED__COM }}
+        BUNDLE_RUBYGEMS__TED__COM: ${{ inputs.rubygems-key }}
       with:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
