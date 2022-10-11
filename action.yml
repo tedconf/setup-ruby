@@ -2,6 +2,10 @@ name: Set up Ruby
 description: Common actions for Rails and Ruby workflows
 
 inputs:
+  ruby-version:
+    description: "Version of ruby to install"
+    required: false
+    default: ""
   ssh-private-key:
     description: "SSH key for checking out repos"
     required: true
@@ -28,6 +32,18 @@ runs:
       with:
         gem-name: curb
         required-library: "libcurl4 libcurl3-gnutls libcurl4-openssl-dev"
+    - name: Set ruby version
+      id: ruby
+      shell: bash
+      run: |
+        if [ -n "${{ inputs.ruby-version }}" ]; then
+          ruby_version="${{ inputs.ruby-version }}"
+        else
+          ruby_version=$(tail .ruby-version)
+        fi
+        echo "Using version ${ruby_version}"
+        echo "::set-output name=version::${ruby_version}"
+
     - name: Set up Ruby
       # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
       # change this to ruby/setup-ruby@v1 (see
@@ -37,4 +53,5 @@ runs:
         BUNDLE_RUBYGEMS__TED__COM: ${{ inputs.rubygems-key }}
       with:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        ruby-version: ${{ steps.ruby.outputs.version }}
 
