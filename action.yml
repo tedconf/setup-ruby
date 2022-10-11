@@ -41,7 +41,7 @@ runs:
         else
           ruby_version=$(tail .ruby-version)
         fi
-        echo "Installling ruby version ${ruby_version}"
+        echo "Installing ruby version ${ruby_version}"
         echo "::set-output name=version::${ruby_version}"
 
     - name: Set up Ruby
