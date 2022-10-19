@@ -33,6 +33,7 @@ runs:
         gem-name: curb
         required-library: "libcurl4 libcurl3-gnutls libcurl4-openssl-dev"
     - name: Set ruby version
+      id: ruby_version
       shell: bash
       run: |
         if [ -n "${{ inputs.ruby-version }}" ]; then
@@ -41,7 +42,7 @@ runs:
           ruby_version=$(tail .ruby-version)
         fi
         echo "Installing ruby version ${ruby_version}"
-        echo "ruby_version=${ruby_version}" >> $GITHUB_ENV
+        echo "RUBY_VERSION=${ruby_version}" >> $GITHUB_OUTPUT
 
     - name: Set up Ruby
       # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
@@ -52,4 +53,4 @@ runs:
         BUNDLE_RUBYGEMS__TED__COM: ${{ inputs.rubygems-key }}
       with:
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-        ruby-version: ${{ env.ruby_version }}
+        ruby-version: ${{ steps.ruby_version.outputs.RUBY_VERSION }}
