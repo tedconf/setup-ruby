@@ -35,7 +35,7 @@ runs:
     - name: Install libgmp3-dev
       shell: bash
       run: |
-        sudo apt-get install libgmp3-dev
+        sudo apt-get -y install libgmp3-dev
     - name: Set ruby version
       id: ruby_version
       shell: bash
