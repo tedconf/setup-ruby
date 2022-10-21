@@ -23,12 +23,12 @@ runs:
       with:
         ssh-private-key: ${{ inputs.ssh-private-key }}
     - name: Check for SASL dependencies
-      uses: tedconf/install-ruby-dependency-action@1.1.1
+      uses: tedconf/install-ruby-dependency-action@v1.1.1
       with:
         gem-name: memcached
         required-library: libsasl2-dev
     - name: Check for cURL dependencies
-      uses: tedconf/install-ruby-dependency-action@1.1.1
+      uses: tedconf/install-ruby-dependency-action@v1.1.1
       with:
         gem-name: curb
         required-library: "libcurl4 libcurl3-gnutls libcurl4-openssl-dev"
