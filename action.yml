@@ -36,10 +36,6 @@ runs:
       with:
         gem-name: curb
         required-library: "libcurl4 libcurl3-gnutls libcurl4-openssl-dev"
-    - name: Install libgmp3-dev
-      shell: bash
-      run: |
-        sudo apt-get -y install libgmp3-dev
     - name: Set ruby version
       id: ruby_version
       shell: bash
