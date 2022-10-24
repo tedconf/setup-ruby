@@ -12,6 +12,10 @@ inputs:
   rubygems-key:
     description: "Key for rubygems"
     required: true
+  bundler-version:
+    description: "Version of bundler to install"
+    default: 'Gemfile.lock'
+    required: false
 
 runs:
   using: 'composite'
@@ -56,5 +60,6 @@ runs:
       env:
         BUNDLE_RUBYGEMS__TED__COM: ${{ inputs.rubygems-key }}
       with:
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
         ruby-version: ${{ steps.ruby_version.outputs.RUBY_VERSION }}
+        bundler: ${{ inputs.bundler-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
