@@ -1,3 +1,13 @@
+# v1.1.3 (2022-10-24)
+- Adds bundler-version input
+- Adds more system dependency logic for gems
+
+# v1.1.2 (2022-10-19)
+- Changes variable assignment to use environment variables again
+
+# 1.1.1 (2022-10-19)
+- Bumps ssh-agent to 0.7.0
+
 # 1.1.0 (2022-10-13)
 - Changes variable assignment to use environment variables
 
