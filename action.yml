@@ -52,7 +52,7 @@ runs:
       # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
       # change this to ruby/setup-ruby@v1 (see
       # https://github.com/ruby/setup-ruby#versioning)
-      uses: ruby/setup-ruby@v1.111.0
+      uses: ruby/setup-ruby@v1.121.0
       env:
         BUNDLE_RUBYGEMS__TED__COM: ${{ inputs.rubygems-key }}
       with:
