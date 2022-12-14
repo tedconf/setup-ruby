@@ -1,3 +1,6 @@
+# v1.1.5
+- Adds support for Sidekiq Pro downloads.
+
 # v1.1.4 (2022-11-11)
 - Updates ruby/setup-ruby to v1 (which should automatically get fixes without
   having to manually update the tag); in this case, ruby 2.7 wasn't available
