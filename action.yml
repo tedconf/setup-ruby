@@ -12,6 +12,9 @@ inputs:
   rubygems-key:
     description: "Key for rubygems"
     required: true
+  contribsys-key:
+    description: "Private key for Sidekiq Pro"
+    required: false
   bundler-version:
     description: "Version of bundler to install"
     default: 'Gemfile.lock'
@@ -55,6 +58,7 @@ runs:
       uses: ruby/setup-ruby@v1
       env:
         BUNDLE_RUBYGEMS__TED__COM: ${{ inputs.rubygems-key }}
+        BUNDLE_GEMS__CONTRIBSYS__COM: ${{ inputs.contribsys-key }}
       with:
         ruby-version: ${{ steps.ruby_version.outputs.RUBY_VERSION }}
         bundler: ${{ inputs.bundler-version }}
