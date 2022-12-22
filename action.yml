@@ -19,6 +19,9 @@ inputs:
     description: "Version of bundler to install"
     default: 'Gemfile.lock'
     required: false
+  rails-master-key:
+    description: "master.key file contents to decrypt Rails encrypted credentials"
+    required: false
 
 runs:
   using: 'composite'
@@ -59,6 +62,7 @@ runs:
       env:
         BUNDLE_RUBYGEMS__TED__COM: ${{ inputs.rubygems-key }}
         BUNDLE_GEMS__CONTRIBSYS__COM: ${{ inputs.contribsys-key }}
+        RAILS_MASTER_KEY: ${{ inputs.rails-master-key }}
       with:
         ruby-version: ${{ steps.ruby_version.outputs.RUBY_VERSION }}
         bundler: ${{ inputs.bundler-version }}
