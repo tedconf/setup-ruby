@@ -1,3 +1,6 @@
+# v1.1.6
+- Add support for Rails encrypted credentials.
+
 # v1.1.5
 - Adds support for Sidekiq Pro downloads.
 
