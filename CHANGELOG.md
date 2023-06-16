@@ -1,8 +1,11 @@
+# v1.1.7
+- Adds support for GraphQL Pro and Enterprise gem installation.
+
 # v1.1.6
 - Add support for Rails encrypted credentials.
 
 # v1.1.5
-- Adds support for Sidekiq Pro downloads.
+- Adds support for Sidekiq Pro gem installation.
 
 # v1.1.4 (2022-11-11)
 - Updates ruby/setup-ruby to v1 (which should automatically get fixes without
